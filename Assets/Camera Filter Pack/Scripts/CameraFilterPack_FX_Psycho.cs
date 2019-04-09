@@ -12,8 +12,6 @@ private Material SCMaterial;
 private float TimeX = 1.0f;
 [Range(0, 1)]
 public float Distortion = 1.0f;
-[Range(0, 100)]
-public float TimeSpot = 0.2f;
 #endregion
 #region Properties
 Material material
@@ -45,7 +43,6 @@ if(SCShader != null)
 TimeX+=Time.deltaTime;
 if (TimeX>100)  TimeX=0;
 material.SetFloat("_TimeX", TimeX);
-material.SetFloat("_Distortion", TimeSpot);
 material.SetFloat("_Distortion", Distortion);
 Graphics.Blit(sourceTexture, destTexture, material);
 }

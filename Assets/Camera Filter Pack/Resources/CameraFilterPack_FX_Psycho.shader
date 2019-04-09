@@ -10,7 +10,6 @@ Properties
 _MainTex ("Base (RGB)", 2D) = "white" {}
 _TimeX ("Time", Range(0.0, 1.0)) = 1.0
 _Distortion ("_Distortion", Range(0.0, 1.0)) = 1.0
-_TimeSpot ("_TimeSpot", Range(0.0, 100.0)) = .2
 }
 SubShader 
 {
@@ -28,7 +27,6 @@ CGPROGRAM
 uniform sampler2D _MainTex;
 uniform float _TimeX;
 uniform float _Distortion;
-uniform float _TimeSpot;
 struct appdata_t
 {
 float4 vertex   : POSITION;
@@ -65,7 +63,7 @@ float2 uvst = UnityStereoScreenSpaceUVAdjust(i.texcoord, _MainTex_ST);
 float2 xy  = uvst;
 float4 tx = tex2D(_MainTex, xy);
 float4 x=tx;
-x = mod(x + _TimeSpot *.5, 1.);
+x = mod(x + _TimeX*.5, 1.);
 x = floor(x*8.)*_Distortion;
 x = mod(x,2.);
 return float4(x.rgb, tx.a);
